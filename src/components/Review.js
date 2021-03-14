@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom';
 import PersonalInfo from './PersonalInfo';
 import BusinessInfo from './BusinessInfo';
 import CardInfo from './CardInfo';
+import {clear} from '../Utils/webStorage';
 
 export const Review = (props)=>{
 
@@ -11,7 +12,8 @@ export const Review = (props)=>{
     }
 
     const submit = ()=>{
-        console.log('Submited')
+        clear();
+        props.history.push('/');
     }
 
     return (
