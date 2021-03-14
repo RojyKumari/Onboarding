@@ -1,25 +1,46 @@
-import logo from './logo.svg';
+import {connect} from 'react-redux';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import './App.css';
+import PersonalInfo from './components/PersonalInfo';
+import BusinessInfo from './components/BusinessInfo';
+import CardInfo from './components/CardInfo';
+import Review from './components/Review';
+import {updatePersonalInfo, updateBusinessInfo, updateCardInfo} from './store/app.actions';
 
-function App() {
+function App(props) {
+  console.log(props);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+       <Switch>
+          <Route path="/business">
+            <BusinessInfo onSubmit={props.updateBusinessInfo}/>
+          </Route>
+          <Route path="/card">
+            <CardInfo onSubmit={props.updateCardInfo}/>
+          </Route>
+          <Route path="/review">
+          <Review/>
+          </Route>
+          <Route path="/">
+          <PersonalInfo onSubmit={props.updatePersonalInfo}/>
+          </Route>
+        </Switch>
+    </Router>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return state;
+}
+
+const mapDispatchToProps = {
+  updatePersonalInfo,
+  updateBusinessInfo,
+  updateCardInfo
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
