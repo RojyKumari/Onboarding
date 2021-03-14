@@ -28,6 +28,7 @@ class PersonalInfo extends Component {
         return (
             <div>
                 <h1>Personal Info</h1>
+                <fieldset disabled={this.props.isReview}>
             <form>
             <label htmlFor="name">
                 Name : <input type="text" id="name" value={this.state.name} onChange={this.handleInput}></input>
@@ -55,6 +56,7 @@ class PersonalInfo extends Component {
             <br></br>
             {this.props.isReview?null:<button onClick={this.handleNextClick}>Next</button>}
             </form>
+            </fieldset>
             </div>
         )
       

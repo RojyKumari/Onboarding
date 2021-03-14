@@ -38,6 +38,7 @@ class CardInfo extends Component {
         return (
             <div>
             <h1>Debit Card Info</h1>
+            <fieldset disabled={this.props.isReview}>
             <form>
             <label htmlFor="name">
                 Name to be Printed : <input type="text" id="name" value={this.state.name} onChange={this.handleInput}></input>
@@ -69,6 +70,7 @@ class CardInfo extends Component {
             {this.props.isReview?null:<><button onClick={this.handlePrevClick}>Previous</button>
             <button onClick={this.handleNextClick}>Next</button></>}
             </form>
+            </fieldset>
         </div>)
 
     }

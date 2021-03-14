@@ -41,6 +41,7 @@ class BusinessInfo extends Component {
         return (
             <div>
             <h1>Business Info</h1>
+            <fieldset disabled={this.props.isReview}>
             <form>
             <label htmlFor="name">
                 Business Name : <input type="text" id="name" value={this.state.name} onChange={this.handleInput}></input>
@@ -74,6 +75,7 @@ class BusinessInfo extends Component {
             {this.props.isReview?null:<><button onClick={this.handlePrevClick}>Previous</button>
             <button onClick={this.handleNextClick}>Next</button></>}
             </form>
+            </fieldset>
             </div>
         )
 
