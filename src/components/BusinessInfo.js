@@ -8,9 +8,9 @@ class BusinessInfo extends Component {
         super(props);
         this.state = {
             name: '',
-            SSN: '',
+            ssn: '',
             state: '',
-            zipCode: ''
+            zipcode: ''
         }
     }
 
@@ -32,7 +32,22 @@ class BusinessInfo extends Component {
         
     }
 
-    componentDidMount(){
+    componentDidUpdate(prevProps, prevState){
+        if(prevState.sameAsPersonal !== this.state.sameAsPersonal){
+            if(this.state.sameAsPersonal){
+                const {address, state, city, zipcode} = getItem('personalInfo');
+                this.setState({
+                    address, state, city, zipcode
+                });
+             }else{
+                this.setState({
+                    address:'', state:'', city:'', zipcode:''
+                });
+             }
+        }
+    }
+
+    componentDidMount(){ 
         this.setState(getItem('businessInfo'));
         if(!this.props.isReview)this.props.onSubmit(this.state);
     }
@@ -42,38 +57,38 @@ class BusinessInfo extends Component {
             <div>
             <h1>Business Info</h1>
             <fieldset disabled={this.props.isReview}>
-            <form>
+            <form onSubmit={this.handleNextClick}>
             <label htmlFor="name">
-                Business Name : <input type="text" id="name" value={this.state.name} onChange={this.handleInput}></input>
+                Business Name : <input type="text" required id="name" value={this.state.name} onChange={this.handleInput}></input>
             </label>
             <br></br>
             <label htmlFor="company">
-                Company Registered : <input type="text" id="company" value={this.state.company} onChange={this.handleInput}></input>
+                Company Registered : <input type="text" required id="company" value={this.state.company} onChange={this.handleInput}></input>
             </label>
             <br></br>
             <label htmlFor="address">
-                Address : <input type="text" id="address" value={this.state.address} onChange={this.handleInput}></input>
+                Address : <input type="text" id="address" required value={this.state.address} onChange={this.handleInput}></input>
             </label>
             <br></br>
             <label htmlFor="sameAsPersonal">
-                Same as Personal: <input type="checkbox" id="sameAsPersonal" checked={this.state.sameAsPersonal} onChange={this.handleInput}></input>
+                Same as Personal: <input type="checkbox"  id="sameAsPersonal" checked={this.state.sameAsPersonal} onChange={this.handleInput}></input>
             </label>
             <br></br>
             <label htmlFor="city">
-                City : <input type="text" id="city" value={this.state.city} onChange={this.handleInput}></input>
+                City : <input type="text" id="city" required value={this.state.city} onChange={this.handleInput}></input>
             </label>
             <br></br>
             <label htmlFor="state">
-                State : <input type="text" id="state" value={this.state.state} onChange={this.handleInput}></input>
+                State : <input type="text" id="state" pattern="[A-Za-z]{2}" required value={this.state.state} onChange={this.handleInput}></input>
             </label>
             <br></br>
             <label htmlFor="zipcode">
-                Zip Code : <input type="number" id="zipcode" value={this.state.zipcode} onChange={this.handleInput}></input>
+                Zip Code : <input type="number" id="zipcode" required value={this.state.zipcode} onChange={this.handleInput}></input>
             </label>
             <br></br>
 
-            {this.props.isReview?null:<><button onClick={this.handlePrevClick}>Previous</button>
-            <button onClick={this.handleNextClick}>Next</button></>}
+            {this.props.isReview?null:<><button onClick={this.handlePrevClick}>Back</button>
+            <input type="submit" value="Next"/></>}
             </form>
             </fieldset>
             </div>

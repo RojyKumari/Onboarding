@@ -28,6 +28,26 @@ class CardInfo extends Component {
         this.props.history.push('/business');
     }
 
+    componentDidUpdate(prevProps, prevState){
+        if(prevState.sameAsBusiness !== this.state.sameAsBusiness || prevState.sameAsPersonal !== this.state.sameAsPersonal){
+            if(this.state.sameAsPersonal){
+                const {address, state, city, zipcode} = getItem('personalInfo');
+                this.setState({
+                    address, state, city, zipcode
+                });
+            }else if(this.state.sameAsBusiness){
+                const {address, state, city, zipcode} = getItem('personalInfo');
+                this.setState({
+                    address, state, city, zipcode
+                });
+            }else{
+                this.setState({
+                    address:'', state:'', city:'', zipcode:''
+                });
+            }
+        }
+    }
+
     componentDidMount(){
         this.setState(getItem('cardInfo'));
         if(!this.props.isReview)this.props.onSubmit(this.state);
@@ -39,36 +59,38 @@ class CardInfo extends Component {
             <div>
             <h1>Debit Card Info</h1>
             <fieldset disabled={this.props.isReview}>
-            <form>
+            <form onSubmit={this.handleNextClick}>
             <label htmlFor="name">
-                Name to be Printed : <input type="text" id="name" value={this.state.name} onChange={this.handleInput}></input>
+                Name to be printed : <input type="text" required id="name" value={this.state.name} onChange={this.handleInput}></input>
             </label>
             <br></br>
             <label htmlFor="address">
-                Address : <input type="text" id="address" value={this.state.address} onChange={this.handleInput}></input>
+                Address : <input type="text" id="address" required value={this.state.address} onChange={this.handleInput}></input>
             </label>
             <br></br>
-            <label htmlFor="same">
-                Same as Personal: <input type="radio" id="sameAsPersonal" name="same" checked={this.state.sameAsPersonal} onChange={this.handleInput}></input>
+            <input type="radio" id="sameAsPersonal" name="same" checked={this.state.sameAsPersonal} onChange={this.handleInput}/>
+            <label htmlFor="sameAsPersonal">
+                Same as personal
             </label>
-            <label htmlFor="same">
-                Same as Business: <input type="radio" id="sameAsBusiness" name="same" checked={this.state.sameAsBusiness} onChange={this.handleInput}></input>
+            <input type="radio" id="sameAsBusiness" name="same" checked={this.state.sameAsBusiness} onChange={this.handleInput}/>
+            <label htmlFor="sameAsBusiness">
+                Same as business
             </label>
             <br></br>
             <label htmlFor="city">
-                City : <input type="text" id="city" value={this.state.city} onChange={this.handleInput}></input>
+                City : <input type="text" id="city" required value={this.state.city} onChange={this.handleInput}></input>
             </label>
             <br></br>
             <label htmlFor="state">
-                State : <input type="text" id="state" value={this.state.state} onChange={this.handleInput}></input>
+                State : <input type="text" id="state" pattern="[A-Za-z]{2}" required value={this.state.state} onChange={this.handleInput}></input>
             </label>
             <br></br>
             <label htmlFor="zipcode">
-                Zip Code : <input type="number" id="zipcode" value={this.state.zipcode} onChange={this.handleInput}></input>
+                Zip Code : <input type="number" id="zipcode" required value={this.state.zipcode} onChange={this.handleInput}></input>
             </label>
             <br></br>
-            {this.props.isReview?null:<><button onClick={this.handlePrevClick}>Previous</button>
-            <button onClick={this.handleNextClick}>Next</button></>}
+            {this.props.isReview?null:<><button onClick={this.handlePrevClick}>Back</button>
+            <input type="submit" value="Next"/></>}
             </form>
             </fieldset>
         </div>)
