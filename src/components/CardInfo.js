@@ -7,6 +7,14 @@ class CardInfo extends Component {
     constructor(props){
         super(props);
         this.state = {
+            name:'',
+            address:'',
+            city:'',
+            state: '',
+            zipcode: '',
+            sameAsPersonal:false,
+            sameAsBusiness: false,
+
         }
     }
 
@@ -56,7 +64,7 @@ class CardInfo extends Component {
 
     render(){
         return (
-            <div>
+            <div className="form-container">
             <h1>Debit Card Info</h1>
             <fieldset disabled={this.props.isReview}>
             <form onSubmit={this.handleNextClick}>
@@ -68,6 +76,7 @@ class CardInfo extends Component {
                 Address : <input type="text" id="address" required value={this.state.address} onChange={this.handleInput}></input>
             </label>
             <br></br>
+            <div>
             <input type="radio" id="sameAsPersonal" name="same" checked={this.state.sameAsPersonal} onChange={this.handleInput}/>
             <label htmlFor="sameAsPersonal">
                 Same as personal
@@ -76,6 +85,7 @@ class CardInfo extends Component {
             <label htmlFor="sameAsBusiness">
                 Same as business
             </label>
+            </div>
             <br></br>
             <label htmlFor="city">
                 City : <input type="text" id="city" required value={this.state.city} onChange={this.handleInput}></input>
@@ -89,8 +99,8 @@ class CardInfo extends Component {
                 Zip Code : <input type="number" id="zipcode" required value={this.state.zipcode} onChange={this.handleInput}></input>
             </label>
             <br></br>
-            {this.props.isReview?null:<><button onClick={this.handlePrevClick}>Back</button>
-            <input type="submit" value="Next"/></>}
+            {this.props.isReview?null:<div className="button-container"><button onClick={this.handlePrevClick}>Back</button>
+            <input type="submit" value="Next"/></div>}
             </form>
             </fieldset>
         </div>)

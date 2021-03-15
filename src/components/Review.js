@@ -17,13 +17,14 @@ export const Review = (props)=>{
     }
 
     return (
-        <>
+        <div className='review'>
+        <h1 className="review-heading">Review</h1>
         <PersonalInfo isReview={true}/>
         <BusinessInfo isReview={true}/>
         <CardInfo isReview={true}/>
         <button onClick={back}>Back</button>
         <button onClick={submit}>Submit application</button>
-        </>
+        </div>
     )
 }
 

@@ -6,7 +6,14 @@ class PersonalInfo extends Component {
 
     constructor(props){
         super(props);
-        this.state = {};
+        this.state = {
+            name:'',
+            ssn:'',
+            address:'',
+            city:'',
+            state: '',
+            zipcode: '',
+        };
     }
 
     handleNextClick = ()=>{
@@ -26,7 +33,7 @@ class PersonalInfo extends Component {
 
     render(){
         return (
-            <div>
+            <div className="form-container">
                 <h1>Personal Info</h1>
                 <fieldset disabled={this.props.isReview}>
             <form onSubmit={this.handleNextClick}>
@@ -54,7 +61,7 @@ class PersonalInfo extends Component {
                 Zip Code : <input type="text" id="zipcode" required value={this.state.zipcode} onChange={this.handleInput}></input>
             </label>
             <br></br>
-            {this.props.isReview?null:<input type="submit" value="Next"/>}
+            {this.props.isReview?null:<div className="button-container"><input type="submit" value="Next"/></div>}
             </form>
             </fieldset>
             </div>

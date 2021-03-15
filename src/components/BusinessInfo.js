@@ -8,9 +8,12 @@ class BusinessInfo extends Component {
         super(props);
         this.state = {
             name: '',
-            ssn: '',
+            company: '',
+            address:'',
+            city:'',
             state: '',
-            zipcode: ''
+            zipcode: '',
+            sameAsPersonal: false,
         }
     }
 
@@ -54,7 +57,7 @@ class BusinessInfo extends Component {
 
     render(){
         return (
-            <div>
+            <div className="form-container">
             <h1>Business Info</h1>
             <fieldset disabled={this.props.isReview}>
             <form onSubmit={this.handleNextClick}>
@@ -87,8 +90,8 @@ class BusinessInfo extends Component {
             </label>
             <br></br>
 
-            {this.props.isReview?null:<><button onClick={this.handlePrevClick}>Back</button>
-            <input type="submit" value="Next"/></>}
+            {this.props.isReview?null:<div className="button-container"><button onClick={this.handlePrevClick}>Back</button>
+            <input type="submit" value="Next"/></div>}
             </form>
             </fieldset>
             </div>
