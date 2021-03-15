@@ -29,32 +29,32 @@ class PersonalInfo extends Component {
             <div>
                 <h1>Personal Info</h1>
                 <fieldset disabled={this.props.isReview}>
-            <form>
+            <form onSubmit={this.handleNextClick}>
             <label htmlFor="name">
-                Name : <input type="text" id="name" value={this.state.name} onChange={this.handleInput}></input>
+                Name : <input type="text" id="name" required value={this.state.name} onChange={this.handleInput}></input>
             </label>
             <br></br>
             <label htmlFor="ssn">
-                SSN : <input type="number" id="ssn" value={this.state.ssn} onChange={this.handleInput}></input>
+                SSN : <input type="text" id="ssn" required pattern="[0-9]{9}" value={this.state.ssn} onChange={this.handleInput}></input>
             </label>
             <br></br>
             <label htmlFor="address">
-                Address : <input type="text" id="address" value={this.state.address} onChange={this.handleInput}></input>
+                Address : <input type="text" id="address" required value={this.state.address} onChange={this.handleInput}></input>
             </label>
             <br></br>
             <label htmlFor="city">
-                City : <input type="text" id="city" value={this.state.city} onChange={this.handleInput}></input>
+                City : <input type="text" id="city" required value={this.state.city} onChange={this.handleInput}></input>
             </label>
             <br></br>
             <label htmlFor="state">
-                State : <input type="text" id="state" value={this.state.state} onChange={this.handleInput}></input>
+                State : <input type="text" id="state" required pattern="[A-Za-z]{2}" value={this.state.state} onChange={this.handleInput}></input>
             </label>
             <br></br>
             <label htmlFor="zipcode">
-                Zip Code : <input type="text" id="zipcode" value={this.state.zipcode} onChange={this.handleInput}></input>
+                Zip Code : <input type="text" id="zipcode" required value={this.state.zipcode} onChange={this.handleInput}></input>
             </label>
             <br></br>
-            {this.props.isReview?null:<button onClick={this.handleNextClick}>Next</button>}
+            {this.props.isReview?null:<input type="submit" value="Next"/>}
             </form>
             </fieldset>
             </div>
